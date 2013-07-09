@@ -6,7 +6,7 @@ Memoize a slow with callback in its arguments.
 
 Installation
 ------------
-    npm install memoize
+    npm install memoize_test
 
 Usage
 -----
