@@ -1,6 +1,6 @@
 memoization_test
 =======
-Memoize a slow with callback in its arguments.
+Memoize a slow function with callback in its arguments.
 
 
 
@@ -11,7 +11,7 @@ Installation
 Usage
 -----
 
-The input of memoize is slow_function and the output is a faster function
+The input of memoize is slow_function and the output is a faster function.
 ```javascript
 memoize = require('memoize_test')
 
