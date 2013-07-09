@@ -1,0 +1,21 @@
+{
+  "name": "memoize_test",
+  "description": "Memoize a slow with callback in its arguments",
+  "keywords": [
+    "memoize",
+    "cache"
+   ],
+  "version": "0.1.2",
+  "author": "Esteban Arango Medina <marranoparael31@gmail.com>",
+  "engines": {
+    "node": "*"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "main": "./memoization",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esbanarango/memoization_test"
+  }
+}
