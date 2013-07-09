@@ -28,4 +28,4 @@ memoize = (slow_fn)->
               slow_fn_callback(value)
           ])
 
-module.exports = memoize
+module.exports.memoize = memoize
