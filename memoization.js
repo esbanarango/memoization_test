@@ -39,6 +39,6 @@
     }
   };
 
-  module.exports.memoize = memoize;
+  module.exports = memoize;
 
 }).call(this);
