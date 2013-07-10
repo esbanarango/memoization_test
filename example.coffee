@@ -12,7 +12,7 @@ rl = readline.createInterface(
   output: process.stdout
 )
 
-slow_fn = (n,callback)->
+slow_fn = (callback,n)->
   resp = n*n
   i = 0
   while i < 2000000000
@@ -26,9 +26,10 @@ ask = ->
     if isNaN(parseFloat(n))
       rl.close()
     else
-      fast_fn n, (err, val)->
+      fast_fn ((err, val)->
         throw err  if err
         console.log("Result: "+ val)
+      ),n
       ask()
 
 

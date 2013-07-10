@@ -4,12 +4,12 @@
 
   data = {};
 
-  cache_store = function(key, value, callback) {
+  cache_store = function(callback, key, value) {
     callback(null, value);
     return data[key] = value;
   };
 
-  cache_retrieve = function(key, callback) {
+  cache_retrieve = function(callback, key) {
     return callback(null, data[key]);
   };
 
@@ -20,23 +20,23 @@
       return function() {
         var args, input, slow_fn_callback;
         args = slice.call(arguments);
-        slow_fn_callback = args[1];
-        input = args[0];
-        return cache_retrieve(input, function(err, value) {
+        slow_fn_callback = args[0];
+        input = args[1];
+        return cache_retrieve((function(err, value) {
           if (value) {
             return slow_fn_callback(err, value);
           } else {
             return process.nextTick(function() {
               return slow_fn.apply(this, [
-                input, function(err, value) {
-                  return cache_store(input, value, function(err, value) {
+                (function(err, value) {
+                  return cache_store((function(err, value) {
                     return slow_fn_callback(err, value);
-                  });
-                }
+                  }), input, value);
+                }), input
               ]);
             });
           }
-        });
+        }), input);
       };
     }
   };
