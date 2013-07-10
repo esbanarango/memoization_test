@@ -5,7 +5,7 @@
     "memoize",
     "cache"
    ],
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": "Esteban Arango Medina <marranoparael31@gmail.com>",
   "engines": {
     "node": "*"
