@@ -14,7 +14,9 @@ rl = readline.createInterface(
 
 slow_fn = (n,callback)->
   resp = n*n
-  setTimeout(callback, 2000, resp)
+  setTimeout (->
+    callback(null,resp)
+    ), 4000
 
 fast_fn = memoize slow_fn
 
@@ -24,9 +26,10 @@ ask = ->
     if isNaN(parseFloat(n))
       rl.close()
     else
-      fast_fn n, (val)->
+      fast_fn n, (err, val)->
+        throw err  if err
         console.log("Result: "+ val)
-        ask()
+      ask()
 
 
 ask()
