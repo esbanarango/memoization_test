@@ -1,7 +1,7 @@
 data = {} # The cache store
 
 cache_store = (callback,key,value) ->
-  callback(null,value)
+  callback(null,value) if callback
   data[key] = value
 
 cache_retrieve = (callback,key) ->
@@ -19,15 +19,14 @@ memoize = (slow_fn)->
       cache_retrieve ((err,value)->
         # If the value has been saved before (cached)
         # then return it with the slow function callback
-        # otherwise calculate it, save it and return it with the callback
+        # otherwise calculate it, return it with the callback and save it
         if value
           slow_fn_callback(err,value)
         else
           process.nextTick ->
             slow_fn.apply(this, [((err,value)->
-              cache_store ((err,value)->
-                slow_fn_callback(err,value)
-              ),input, value
+              slow_fn_callback(err,value) # callback is called as soon as information is ready
+              cache_store null,input, value
             ),input])
       ), input
 

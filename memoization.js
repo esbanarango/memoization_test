@@ -5,7 +5,9 @@
   data = {};
 
   cache_store = function(callback, key, value) {
-    callback(null, value);
+    if (callback) {
+      callback(null, value);
+    }
     return data[key] = value;
   };
 
@@ -29,9 +31,8 @@
             return process.nextTick(function() {
               return slow_fn.apply(this, [
                 (function(err, value) {
-                  return cache_store((function(err, value) {
-                    return slow_fn_callback(err, value);
-                  }), input, value);
+                  slow_fn_callback(err, value);
+                  return cache_store(null, input, value);
                 }), input
               ]);
             });
