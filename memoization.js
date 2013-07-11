@@ -4,7 +4,7 @@
 
   data = {};
 
-  default_ttl = 7000;
+  default_ttl = 5000;
 
   cache_store = function(callback, key, value) {
     if (callback) {

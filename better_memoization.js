@@ -6,7 +6,7 @@
 
   data = {};
 
-  default_ttl = 4000;
+  default_ttl = 5000;
 
   cache_store = function(callback, key, value) {
     if (callback) {
@@ -34,6 +34,7 @@
         var args, eventEmitter, input, sendCallback, slow_fn_callback, ttl;
         args = slice.call(arguments);
         slow_fn_callback = args[0];
+        console.log(slow_fn_callback === arguments[0]);
         input = args[1];
         ttl = opts.ttl || default_ttl;
         eventEmitter = new events.EventEmitter();
