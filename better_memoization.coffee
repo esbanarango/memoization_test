@@ -1,6 +1,7 @@
 events = require "events"
 
 data = {} # The cache store
+default_ttl = 5000 # Default time to live to 7 seconds
 
 cache_store = (callback,key,value) ->
   callback(null,value) if callback
@@ -12,7 +13,7 @@ cache_retrieve = (callback,key) ->
   else
     callback(null,data[key])
 
-memoize = (slow_fn)->
+memoize = (slow_fn, opts = {})->
   if typeof slow_fn is "function"
     slice = Array::slice
     ->
@@ -21,6 +22,8 @@ memoize = (slow_fn)->
       args = slice.call(arguments)
       slow_fn_callback = args[0]
       input = args[1]
+
+      ttl = opts.ttl || default_ttl
 
       # Create the listenr
       eventEmitter = new events.EventEmitter()
@@ -35,8 +38,8 @@ memoize = (slow_fn)->
       # function that is emitted. In both cases the cache will be updated
       process.nextTick ->
         cache_retrieve ((err,value)->
-          if value
-            eventEmitter.emit "completed", err,value, "cache"
+          if (value && value.ttl > Date.now())
+            eventEmitter.emit "completed", err, value.value, "cache"
             eventEmitter.removeAllListeners "completed"
 
         ), input
@@ -44,7 +47,7 @@ memoize = (slow_fn)->
           slow_fn.apply(this, [((err,value)->
                   eventEmitter.emit "completed", err,value, "slow_function"
                   eventEmitter.removeAllListeners "completed"
-                  cache_store null,input, value
+                  cache_store null,input, {value: value, ttl: Date.now() + ttl}
           ), input])
 
 module.exports = memoize
