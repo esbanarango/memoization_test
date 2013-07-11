@@ -35,7 +35,7 @@ memoize = (slow_fn, opts = {})->
         slow_fn.apply(this, [((err,value)->
           sendCallback err, value, "slow_function" if sendCallback
 
-          # Refresh the cache, so that this tick is not useless if the cache response were faster
+          # Refresh the cache, so that this tick isn't useless if the cache response was faster
           cache_store null, input, {data: value, ttl: Date.now() + ttl}
         ), input])
 
