@@ -5,6 +5,7 @@
 
 better_memoization = require './better_memoization'
 readline = require 'readline'
+
 rl = readline.createInterface(
   input: process.stdin
   output: process.stdout

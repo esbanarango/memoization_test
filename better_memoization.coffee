@@ -1,5 +1,5 @@
 cache_store = {} # The cache store
-default_ttl = 5000 # Default time to live to 7 seconds
+default_ttl = 5000 # Default time to live to 5 seconds
 
 cache_store = (callback,key,value) ->
   callback null, value if callback
@@ -7,7 +7,7 @@ cache_store = (callback,key,value) ->
 
 cache_retrieve = (callback,key) ->
   if key == "2" # Data just to simulate when the cache function can be slower than the slow_function
-    setTimeout callback, 3000, null,cache_store[key]
+    setTimeout callback, 3000, null, cache_store[key]
   else
     callback null, cache_store[key]
 

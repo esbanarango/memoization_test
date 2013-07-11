@@ -1,12 +1,12 @@
 cache_store = {} # The cache store
-default_ttl = 5000 # Default time to live to 7 seconds
+default_ttl = 5000 # Default time to live to 5 seconds
 
 cache_store = (callback,key,value) ->
-  callback(null,value) if callback
+  callback null, value if callback
   cache_store[key] = value
 
 cache_retrieve = (callback,key) ->
-  callback(null,cache_store[key])
+  callback null, cache_store[key]
 
 memoize = (slow_fn, opts = {})->
   if typeof slow_fn is "function"
