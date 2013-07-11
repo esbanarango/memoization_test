@@ -20,9 +20,6 @@ memoize = require('memoize_test')
 fast_function = memoize(slow_function); // runs faster than slow_function by using cache functions
 ```
 
-Usage
------
-
 Different case
 -----
 

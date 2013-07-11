@@ -1,6 +1,6 @@
 {
   "name": "memoize_test",
-  "description": "Memoize a slow with callback in its arguments",
+  "description": "Memoize a slow with callback in its arguments.",
   "keywords": [
     "memoize",
     "cache"
