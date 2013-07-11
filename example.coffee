@@ -3,7 +3,7 @@
 # first time you'll get a delay of ~3 seconds then
 # you'll get the value immediately as it is stored in cache.
 
-memoize = require './better_memoization'
+better_memoization = require './better_memoization'
 readline = require 'readline'
 rl = readline.createInterface(
   input: process.stdin
@@ -14,7 +14,7 @@ slow_fn = (callback,n)->
   resp = n*n
   setTimeout(callback, 2000, null,resp)
 
-fast_fn = memoize slow_fn
+fast_fn = better_memoization slow_fn
 
 ask = ->
   rl.question "What number do you want to be calculated? (Type a letter to exit) \n", (n) ->
