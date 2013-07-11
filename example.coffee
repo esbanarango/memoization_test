@@ -3,10 +3,8 @@
 # first time you'll get a delay of ~3 seconds then
 # you'll get the value immediately as it is stored in cache.
 
-memoize = require './memoization'
+memoize = require './better_memoization'
 readline = require 'readline'
-
-readline = require("readline")
 rl = readline.createInterface(
   input: process.stdin
   output: process.stdout
@@ -14,10 +12,7 @@ rl = readline.createInterface(
 
 slow_fn = (callback,n)->
   resp = n*n
-  i = 0
-  while i < 2000000000
-    i++
-  callback(null,resp)
+  setTimeout(callback, 2000, null,resp)
 
 fast_fn = memoize slow_fn
 
